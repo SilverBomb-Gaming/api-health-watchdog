@@ -1,0 +1,20 @@
+# Points at samples/fixture_server.py (http://127.0.0.1:8765). No secrets.
+# local-fail and local-slow are expected failures, so `api-watch check` exits 1.
+targets:
+  - name: local-ok
+    url: http://127.0.0.1:8765/ok
+    method: GET
+    expect_status: 200
+    timeout_seconds: 5
+
+  - name: local-fail
+    url: http://127.0.0.1:8765/fail
+    method: GET
+    expect_status: 200
+    timeout_seconds: 5
+
+  - name: local-slow
+    url: http://127.0.0.1:8765/slow
+    method: GET
+    expect_status: 200
+    timeout_seconds: 1

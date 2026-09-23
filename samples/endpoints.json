@@ -1,0 +1,29 @@
+{
+  "targets": [
+    {
+      "name": "httpbin-ok",
+      "url": "https://httpbin.org/status/200",
+      "method": "GET",
+      "expect_status": 200,
+      "timeout_seconds": 10
+    },
+    {
+      "name": "httpbin-server-error",
+      "url": "https://httpbin.org/status/500",
+      "method": "GET",
+      "expect_status": 200,
+      "timeout_seconds": 10
+    },
+    {
+      "name": "httpbin-headers",
+      "url": "https://httpbin.org/headers",
+      "method": "GET",
+      "expect_status": 200,
+      "timeout_seconds": 10,
+      "headers": {
+        "X-Demo-Client": "api-watch",
+        "X-Request-Source": "${API_WATCH_SOURCE:-local-demo}"
+      }
+    }
+  ]
+}
