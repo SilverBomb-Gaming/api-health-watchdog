@@ -10,9 +10,7 @@ Built by Alfredo Cardona ([SilverBomb-Gaming](https://github.com/SilverBomb-Gami
 
 ## In the owner's words
 
-<!-- Replace this paragraph after merge. It is the one spot left for a human voice. -->
-
-I wanted a health check I could run from a laptop without a hosted monitor. The pass/fail decision is the status code and the clock, not a model. `--summarize` only runs after something failed, and a sentence that names an endpoint, status, or latency this run did not record is dropped. That limitation is the one I would explain first.
+For this api-health-watchdog, I wanted a health check I could run from a laptop without a hosted monitor. The pass/fail decision is the status code and the clock, not a model. `--summarize` only runs after something failed, and a sentence that names an endpoint, status, or latency this run did not record is dropped. That limitation is the one I would explain first.
 
 ## What it is / isn't
 
