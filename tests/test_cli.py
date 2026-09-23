@@ -228,9 +228,6 @@ targets:
 
 
 def test_summarize_drops_invented_facts(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(503)
-
     class Fake:
         def complete(self, *, system: str, user: str) -> str:
             assert "Do not invent endpoints" in system
@@ -252,7 +249,12 @@ def test_summarize_drops_invented_facts(tmp_path: Path, monkeypatch: pytest.Monk
         def close(self) -> None:
             return None
 
-    _patch_http(monkeypatch, handler)
+    def mixed(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("/other"):
+            return httpx.Response(200)
+        return httpx.Response(503)
+
+    _patch_http(monkeypatch, mixed)
     monkeypatch.setattr("api_watch.cli.build_client", lambda provider, model: Fake())
     path = _write(
         tmp_path,
@@ -264,13 +266,6 @@ targets:
     url: https://example.test/other
 """,
     )
-    # The second target also returns 503 via the handler. Give it a pass by path.
-    def mixed(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/other"):
-            return httpx.Response(200)
-        return httpx.Response(503)
-
-    _patch_http(monkeypatch, mixed)
     result = RUNNER.invoke(
         app,
         ["check", "--config", str(path), "--summarize", "--no-save"],

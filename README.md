@@ -144,14 +144,14 @@ Human output is a table. `PASS` / `FAIL`, the status or `-` when there was no re
 
 ```text
 2026-09-23T20:46:00Z  samples/local.yaml
-NAME        RESULT  STATUS  LATENCY   DETAIL
-----------  ------  ------  --------  ------------------------------
+NAME        RESULT  STATUS  LATENCY    DETAIL
+----------  ------  ------  ---------  ----------------------------
 local-ok    PASS    200     4.0 ms
-local-fail  FAIL    500     3.0 ms    expected status 200, got 500
-local-slow  FAIL    -       1000.2 ms timeout after 1s
+local-fail  FAIL    500     3.0 ms     expected status 200, got 500
+local-slow  FAIL    -       1000.2 ms  timeout after 1s
 ```
 
-The latency column is filled for timeouts too: it is how long this process waited, not a status code. `-` in STATUS means no HTTP status was observed.
+The timestamp and the latency numbers above are an example of the shape. A live run fills them from the clock. The latency column is filled for timeouts too: it is how long this process waited, not a status code. `-` in STATUS means no HTTP status was observed.
 
 `--json` on `check` prints one pretty JSON document. `--json` on `watch` prints one compact JSON object per cycle. The results file is pretty JSON either way.
 
